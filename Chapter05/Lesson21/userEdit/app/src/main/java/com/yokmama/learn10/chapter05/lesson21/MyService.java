@@ -13,6 +13,7 @@ import android.support.v4.app.NotificationCompat;
 public class MyService extends Service {
     public MyService() {
     }
+
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         if (intent != null) {
@@ -26,59 +27,50 @@ public class MyService extends Service {
         }
         return START_NOT_STICKY;
     }
+
     @Override
     public IBinder onBind(Intent intent) {
         // TODO: Return the communication channel to the service.
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
-    /**(
+    /**
      * Notificationを作成
      */
-    private void showNotification(){
+    private void showNotification() {
         //
         Intent intent = new Intent(this, MainActivity.class);
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         //LargeIconのBitmapを生成
         Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.dog);
 
+
         //NotificationBuilderを生成
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext());
-        builder.setContentIntent(contentIntent);
-
-        //ステータスバーを表示されるテキスト
-        builder.setTicker("Ticker");
-
-        //アイコン
-        builder.setSmallIcon(R.drawable.ic_stat_small);
-
-        //Notificationを開いたときに表示されるタイトル
-        builder.setContentTitle("ContentTitle");
-        //Notificationを開いた時に表示されるサブタイトル
-        builder.setContentText("ContentText");
-        //Notificationを開いた時に表示されるアイコン
-        builder.setLargeIcon(largeIcon);
-
-        //通知するタイミング
-        builder.setWhen(System.currentTimeMillis());
-
-        //通知時の音・バイブ・ライト
-        builder.setDefaults(Notification.DEFAULT_SOUND | Notification.DEFAULT_LIGHTS |
-                Notification.DEFAULT_LIGHTS);
-        //タップするとキャンセル
-        builder.setAutoCancel(true);
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext())
+                //NotificationCompat.Builderのメソッドチェーンにより情報をセット
+                .setContentIntent(contentIntent)
+                .setTicker("Ticker")                        //ステータスバーを表示されるテキスト
+                .setSmallIcon(R.drawable.ic_stat_small)    //アイコン
+                .setContentTitle("ContentTitle")           //Notificationを開いたときに表示されるタイトル
+                .setContentText("ContentText")             //Notificationを開いた時に表示されるサブタイトル
+                .setLargeIcon(largeIcon)                     //Notificationを開いた時に表示されるアイコン
+                .setWhen(System.currentTimeMillis())         //通知するタイミング
+                .setDefaults(Notification.DEFAULT_SOUND
+                        | Notification.DEFAULT_LIGHTS
+                        | Notification.DEFAULT_LIGHTS)     //通知時の音・バイブ・ライト
+                .setAutoCancel(true);                        //タップするとキャンセル
 
         //NotificationManagerを取得
         NotificationManager manager = (NotificationManager) getSystemService(Service.NOTIFICATION_SERVICE);
 
         //Notificationを作成して通知
-        manager.notify(0,builder.build());
+        manager.notify(0, builder.build());
     }
 
     /**
      * Notificationを消去
      */
-    private void hideNotification(){
+    private void hideNotification() {
         //NotificationManagerを取得
         NotificationManager manager = (NotificationManager) getSystemService(Service.NOTIFICATION_SERVICE);
         //Notificationを作成して通知
