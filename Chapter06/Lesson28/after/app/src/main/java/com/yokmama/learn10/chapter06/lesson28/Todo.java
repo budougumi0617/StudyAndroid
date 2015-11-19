@@ -2,7 +2,6 @@ package com.yokmama.learn10.chapter06.lesson28;
 
 import java.util.ArrayList;
 import java.util.List;
-import android.support.v4.app.Fragment;
 
 /**
  * Created by m_iwasaki on 15/03/12.
