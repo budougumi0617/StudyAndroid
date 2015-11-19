@@ -44,8 +44,8 @@ public class TodoListAdapter extends ArrayAdapter<Todo> {
         }
 
         //カラーラベルをセット
-        int color = getItem(position).getColorLabel();
-        holder.tvColorLabel.setBackgroundResource(getColorLabelResource(color));
+        Todo.ColorLabel color = getItem(position).getColorLabel();
+        holder.tvColorLabel.setBackgroundResource(color.getBgColor());
         if (!TextUtils.isEmpty(value)) {
             holder.tvColorLabel.setText(value.substring(0, 1));
         }
@@ -73,23 +73,8 @@ public class TodoListAdapter extends ArrayAdapter<Todo> {
      *
      * @param color : カラー
      */
-    private int getColorLabelResource(int color) {
-        int resId = R.drawable.bg_colorlabel_grey;
-        switch (color) {
-            case Todo.ColorLabel.PINK:
-                resId = R.drawable.bg_colorlabel_pink;
-                break;
-            case Todo.ColorLabel.INDIGO:
-                resId = R.drawable.bg_colorlabel_indigo;
-                break;
-            case Todo.ColorLabel.GREEN:
-                resId = R.drawable.bg_colorlabel_green;
-                break;
-            case Todo.ColorLabel.AMBER:
-                resId = R.drawable.bg_colorlabel_amber;
-                break;
-        }
-        return resId;
+    private int getColorLabelResource(Todo.ColorLabel color) {
+        return color.getBgColor();
     }
 
     private class ViewHolder {

@@ -2,38 +2,110 @@ package com.yokmama.learn10.chapter06.lesson28;
 
 import java.util.ArrayList;
 import java.util.List;
+import android.support.v4.app.Fragment;
 
 /**
  * Created by m_iwasaki on 15/03/12.
  */
 public class Todo {
 
-    private int colorLabel;
+    private ColorLabel colorLabel;
 
     private long createdTime;
 
     private String value;
 
-    public static interface ColorLabel {
+//    public static interface ColorLabel {
+//
+//        public static final int NONE = 1;
+//        public static final int PINK = 2;
+//        public static final int INDIGO = 3;
+//        public static final int GREEN = 4;
+//        public static final int AMBER = 5;
+//    }
 
-        public static final int NONE = 1;
-        public static final int PINK = 2;
-        public static final int INDIGO = 3;
-        public static final int GREEN = 4;
-        public static final int AMBER = 5;
+    public enum ColorLabel{
+        NONE(1){
+            @Override
+            int getColorId() {
+                return R.color.material_grey_500;
+            }
+
+            @Override
+            int getBgColor() {
+                return R.drawable.bg_colorlabel_grey;
+            }
+        },
+        PINK(2) {
+            @Override
+            int getColorId() {
+                return R.color.material_pink_500;
+            }
+
+            @Override
+            int getBgColor() {
+                return R.drawable.bg_colorlabel_pink;
+            }
+        },
+        INDIGO(3){
+            @Override
+            int getColorId() {
+                return R.color.material_indigo_500;
+            }
+
+            @Override
+            int getBgColor() {
+                return R.drawable.bg_colorlabel_indigo;
+            }
+
+        },
+        GREEN(4) {
+            @Override
+            int getColorId() {
+                return R.color.material_green_500;
+            }
+
+            @Override
+            int getBgColor() {
+                return R.drawable.bg_colorlabel_green;
+            }
+        },
+        AMBER(5){
+            @Override
+            int getColorId() {
+                return R.color.material_amber_500;
+            }
+
+            @Override
+            int getBgColor() {
+                return R.drawable.bg_colorlabel_amber;
+            }
+        };
+
+        private final int id;
+        private ColorLabel(int id) {
+            this.id = id;
+        }
+
+        public int getId() {
+            return id;
+        }
+
+        abstract int getColorId();
+        abstract int getBgColor();
     }
 
-    public Todo(int colorLabel, String value, long createdTime) {
+    public Todo(ColorLabel colorLabel, String value, long createdTime) {
         this.colorLabel = colorLabel;
         this.value = value;
         this.createdTime = createdTime;
     }
 
-    public int getColorLabel() {
+    public ColorLabel getColorLabel() {
         return colorLabel;
     }
 
-    public void setColorLabel(int colorLabel) {
+    public void setColorLabel(ColorLabel colorLabel) {
         this.colorLabel = colorLabel;
     }
 

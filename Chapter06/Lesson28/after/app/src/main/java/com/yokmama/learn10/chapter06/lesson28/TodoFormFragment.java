@@ -32,7 +32,7 @@ public class TodoFormFragment extends Fragment implements View.OnClickListener {
 
     public static final String ARGS_CREATEDTIME = "key-createdtime";
 
-    private int mColorLabel = Todo.ColorLabel.NONE;
+    private Todo.ColorLabel mColorLabel = Todo.ColorLabel.NONE;
 
     private long mCreatedTime = 0;
 
@@ -46,10 +46,10 @@ public class TodoFormFragment extends Fragment implements View.OnClickListener {
         return new TodoFormFragment();
     }
 
-    public static TodoFormFragment newInstance(int colorLabel, String value, long createdTime) {
+    public static TodoFormFragment newInstance(Todo.ColorLabel colorLabel, String value, long createdTime) {
         TodoFormFragment fragment = new TodoFormFragment();
         Bundle args = new Bundle();
-        args.putInt(ARGS_COLORLABEL, colorLabel);
+        args.putSerializable(ARGS_COLORLABEL, colorLabel);
         args.putString(ARGS_VALUE, value);
         args.putLong(ARGS_CREATEDTIME, createdTime);
         fragment.setArguments(args);
@@ -66,7 +66,7 @@ public class TodoFormFragment extends Fragment implements View.OnClickListener {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
+                             Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_todo, container, false);
 
@@ -99,7 +99,7 @@ public class TodoFormFragment extends Fragment implements View.OnClickListener {
         Bundle args = getArguments();
         if (args != null) {
             //カラーラベルをセット
-            mColorLabel = args.getInt(ARGS_COLORLABEL, Todo.ColorLabel.NONE);
+            mColorLabel = (Todo.ColorLabel)args.getSerializable(ARGS_COLORLABEL);
             mEtInput.setTextColor(getColorResource(mColorLabel));
 
             //値をセット
@@ -194,19 +194,7 @@ public class TodoFormFragment extends Fragment implements View.OnClickListener {
      *
      * @param color : カラー
      */
-    private int getColorResource(int color) {
-        int resId = Todo.ColorLabel.NONE;
-        if (color == Todo.ColorLabel.NONE) {
-            resId = getResources().getColor(R.color.material_grey_500);
-        } else if (color == Todo.ColorLabel.AMBER) {
-            resId = getResources().getColor(R.color.material_amber_500);
-        } else if (color == Todo.ColorLabel.PINK) {
-            resId = getResources().getColor(R.color.material_pink_500);
-        } else if (color == Todo.ColorLabel.INDIGO) {
-            resId = getResources().getColor(R.color.material_indigo_500);
-        } else if (color == Todo.ColorLabel.GREEN) {
-            resId = getResources().getColor(R.color.material_green_500);
-        }
-        return resId;
+    private int getColorResource(Todo.ColorLabel color) {
+        return getResources().getColor(color.getColorId());
     }
 }

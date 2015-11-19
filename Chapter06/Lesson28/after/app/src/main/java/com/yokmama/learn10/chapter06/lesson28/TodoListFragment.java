@@ -116,7 +116,7 @@ public class TodoListFragment extends Fragment implements AdapterView.OnItemClic
         @Override
         public void onReceive(Context context, Intent intent) {
             //Todoデータを作成
-            int color = intent.getIntExtra(TodoFormFragment.ARGS_COLORLABEL, Todo.ColorLabel.NONE);
+            Todo.ColorLabel color = (Todo.ColorLabel) intent.getSerializableExtra(TodoFormFragment.ARGS_COLORLABEL);
             String value = intent.getStringExtra(TodoFormFragment.ARGS_VALUE);
             long createdTime = intent.getLongExtra(TodoFormFragment.ARGS_CREATEDTIME, 0);
             Todo newItem = new Todo(color, value, createdTime);
