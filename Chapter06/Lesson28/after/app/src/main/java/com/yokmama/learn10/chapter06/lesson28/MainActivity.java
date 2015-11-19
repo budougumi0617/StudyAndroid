@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //画面サイズとディレクトリ名で自動的にsetされるactivity_mainが切り替わる
         setContentView(R.layout.activity_main);
 
         //ダミーデータ作成
@@ -26,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
         showTodoList();
 
         //タブレットレイアウトなら右側にフォーム画面を表示
+        //画面サイズがタブレットならば、
+        // layout-w820dpディレクトリからcontainer2を含むactivity_mainがロードされている。
         FrameLayout container2 = (FrameLayout) findViewById(R.id.container2);
         if (container2 != null) {
             mIsTablet = true;
@@ -49,8 +52,12 @@ public class MainActivity extends AppCompatActivity {
      */
     public void showTodoList() {
         String tag = TodoListFragment.TAG;
-        getSupportFragmentManager().beginTransaction().replace(R.id.container,
-                TodoListFragment.newInstance(), tag).commit();
+        getSupportFragmentManager() //Activityに対応するFragmentManagerインスタンスを取得
+                .beginTransaction() //fragmentのトランザクションを開始する
+                .replace(R.id.container, TodoListFragment.newInstance(), tag)
+                //tagという名前でactivity_mainの中にある
+                // containerという名前のレイアウトに新しいinstanceを追加
+                .commit(); //commit()を呼ぶまではFragmentは反映されない。
     }
 
     /**
