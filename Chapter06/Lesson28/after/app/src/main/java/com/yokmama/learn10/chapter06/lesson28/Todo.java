@@ -14,75 +14,67 @@ public class Todo {
 
     private String value;
 
-//    public static interface ColorLabel {
-//
-//        public static final int NONE = 1;
-//        public static final int PINK = 2;
-//        public static final int INDIGO = 3;
-//        public static final int GREEN = 4;
-//        public static final int AMBER = 5;
-//    }
 
     public enum ColorLabel{
         NONE(1){
             @Override
-            int getColorId() {
+            public int getColorId() {
                 return R.color.material_grey_500;
             }
 
             @Override
-            int getBgColor() {
+            public int getBgColor() {
                 return R.drawable.bg_colorlabel_grey;
             }
         },
         PINK(2) {
             @Override
-            int getColorId() {
+            public int getColorId() {
                 return R.color.material_pink_500;
             }
 
             @Override
-            int getBgColor() {
+            public int getBgColor() {
                 return R.drawable.bg_colorlabel_pink;
             }
         },
         INDIGO(3){
             @Override
-            int getColorId() {
+            public int getColorId() {
                 return R.color.material_indigo_500;
             }
 
             @Override
-            int getBgColor() {
+            public int getBgColor() {
                 return R.drawable.bg_colorlabel_indigo;
             }
 
         },
         GREEN(4) {
             @Override
-            int getColorId() {
+            public int getColorId() {
                 return R.color.material_green_500;
             }
 
             @Override
-            int getBgColor() {
+            public int getBgColor() {
                 return R.drawable.bg_colorlabel_green;
             }
         },
         AMBER(5){
             @Override
-            int getColorId() {
+            public int getColorId() {
                 return R.color.material_amber_500;
             }
 
             @Override
-            int getBgColor() {
+            public int getBgColor() {
                 return R.drawable.bg_colorlabel_amber;
             }
         };
 
         private final int id;
-        private ColorLabel(int id) {
+        ColorLabel(int id) {
             this.id = id;
         }
 
@@ -90,8 +82,8 @@ public class Todo {
             return id;
         }
 
-        abstract int getColorId();
-        abstract int getBgColor();
+        public abstract int getColorId();
+        public abstract int getBgColor();
     }
 
     public Todo(ColorLabel colorLabel, String value, long createdTime) {
