@@ -17,15 +17,15 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
 
 @RunWith(AndroidJUnit4.class)
-@MediumTest
+@MediumTest // Filtering test size
 public class ApplicationTest {
 
-    @Rule
+    @Rule // Initialize test case
     public ActivityTestRule<MainActivity> mActivityRule = new ActivityTestRule(MainActivity.class);
 
 
     @Test
-    public void existTextField() {
+    public void existStringHelloWorld() {
         onView(withText("Hello World!")).check(matches(isDisplayed()));
     }
 }
