@@ -1,13 +1,31 @@
 package com.budougumi0617.simpleapplication;
 
-import android.app.Application;
-import android.test.ApplicationTestCase;
 
-/**
- * <a href="http://d.android.com/tools/testing/testing_android.html">Testing Fundamentals</a>
- */
-public class ApplicationTest extends ApplicationTestCase<Application> {
-    public ApplicationTest() {
-        super(Application.class);
+import android.support.test.runner.AndroidJUnit4;
+import android.test.suitebuilder.annotation.MediumTest;
+import android.support.test.rule.ActivityTestRule;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.Rule;
+import com.budougumi0617.simpleapplication.MainActivity;
+
+import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static android.support.test.espresso.matcher.ViewMatchers.withText;
+
+
+@RunWith(AndroidJUnit4.class)
+@MediumTest
+public class ApplicationTest {
+
+    @Rule
+    public ActivityTestRule<MainActivity> mActivityRule = new ActivityTestRule(MainActivity.class);
+
+
+    @Test
+    public void existTextField() {
+        onView(withText("Hello World!")).check(matches(isDisplayed()));
     }
 }
