@@ -2,7 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.budougumi0617.simpleapplication.MyFragment1"
-    android:background="#ff0000">
+    android:background="#ff0000"
+    android:id="@+id/my_fragment1">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView android:layout_width="match_parent" android:layout_height="match_parent"

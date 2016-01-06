@@ -2,8 +2,6 @@ package com.budougumi0617.simpleapplication;
 
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -22,8 +20,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         final TextView textView = (TextView) findViewById(R.id.greet_view);
-        Button button = (Button) findViewById(R.id.button);
-        Button fragment_button = (Button) findViewById(R.id.manage_fragment);
+        Button button = (Button) findViewById(R.id.button_change_greet);
+        Button fragment_button = (Button) findViewById(R.id.button_manage_fragment);
         setSupportActionBar(toolbar);
 
         Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
