@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,33 +21,30 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         final TextView textView = (TextView) findViewById(R.id.greet_view);
-        Button button = (Button) findViewById(R.id.button_change_greet);
+        Button word_button = (Button) findViewById(R.id.button_change_greet);
         Button fragment_button = (Button) findViewById(R.id.button_manage_fragment);
         setSupportActionBar(toolbar);
 
         Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
         if(fragment == null) {
+            /* Write Here */
             fragment = new MyFragment1();
-            FragmentTransaction fragmentTransaction =
-                    getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.add(R.id.fragment_container, fragment).commit();
         }
-        button.setOnClickListener(new View.OnClickListener() {
+        word_button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
-                int resId = textView.getText().equals(getString(R.string.good_evening))?
-                        R.string.hello_world : R.string.good_evening;
-                textView.setText(resId);
+            public void onClick(View view) {
+                /* Write Here */
+                Toast.makeText(MainActivity.this,
+                        "Let's implement word_button", Toast.LENGTH_LONG).show();
+                textView.setText("Hi World!");
             }
         });
         fragment_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
-                fragment = fragment.getClass() == MyFragment1.class ? new MyFragment2() : new MyFragment1();
-                FragmentTransaction fragmentTransaction =
-                        getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.fragment_container, fragment).commit();
+                Toast.makeText(MainActivity.this,
+                        "Let's implement  fragment_button", Toast.LENGTH_LONG).show();
+                /* Write Here */
             }
         });
     }
